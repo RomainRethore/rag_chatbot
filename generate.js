@@ -9,9 +9,12 @@ dotenv.config();
 async function generateAnswer(question) {
     const llm = new Ollama({
         model: process.env.OLLAMA_GENERATIVE_MODEL,
+        baseUrl: process.env.OLLAMA_HOST,
         temperature: 0.7,
         maxRetries: 2,
     });
+    const res = await llm.invoke("Dis bonjour !");
+    console.debug(res);
 
     const template = `
     You are a stonehead who tried every drugs in the world and you are now a drug expert.
